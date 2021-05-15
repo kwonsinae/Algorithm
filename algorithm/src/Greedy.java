@@ -187,15 +187,15 @@ public class Greedy {
             if (i == 1 && check == 0) minusStepFromA--;
             else if (minusStepFromA < 0 && check == 0) minusStepFromA--;
 
-            if(check == 0){
+            if (check == 0) {
                 tempMaximumA += "A";
-            }else{
+            } else {
                 maximumA = maximumA.length() > tempMaximumA.length() ? maximumA : tempMaximumA;
                 tempMaximumA = "";
             }
         }
 
-        if(!maximumA.isEmpty()) {
+        if (!maximumA.isEmpty()) {
             String[] tempName = (name.substring(1)).split(maximumA);
             if (tempName[0].length() > tempName[1].length()) {
                 reversStepFromA = (tempName[1].length() * 2) + tempName[0].length();
@@ -204,8 +204,8 @@ public class Greedy {
             }
         }
 
-        minusStepFromA += name.length() -1;
-        minusStepFromZ += name.length() -1;
+        minusStepFromA += name.length() - 1;
+        minusStepFromZ += name.length() - 1;
 
 
         // JAN
@@ -223,16 +223,16 @@ public class Greedy {
         int minusStep = Math.min(minusStepFromA, minusStepFromZ);
         int reversStep = 0;
 
-        if(reversStepFromA != 0 && reversStepFromZ == 0) reversStep = reversStepFromA;
-        else if(reversStepFromZ != 0 && reversStepFromA == 0)  reversStep = reversStepFromZ;
-        else if(reversStepFromA != 0 && reversStepFromZ != 0) reversStep =Math.min( reversStepFromA, reversStepFromZ);
+        if (reversStepFromA != 0 && reversStepFromZ == 0) reversStep = reversStepFromA;
+        else if (reversStepFromZ != 0 && reversStepFromA == 0) reversStep = reversStepFromZ;
+        else if (reversStepFromA != 0 && reversStepFromZ != 0) reversStep = Math.min(reversStepFromA, reversStepFromZ);
 
         int step = 0;
 
-        if(reversStep != 0) step = Math.min(minusStep, reversStep);
+        if (reversStep != 0) step = Math.min(minusStep, reversStep);
         else step = minusStep;
 
-        return upDownCount + step ;
+        return upDownCount + step;
     }
 
     public int solution3(String name) {
@@ -250,9 +250,9 @@ public class Greedy {
 
             Boolean isA = upDown == 0;
 
-            if(isA){
-                middleACount ++;
-            }else if(middleACount != 0) {
+            if (isA) {
+                middleACount++;
+            } else if (middleACount != 0) {
                 int tempReverseStepRight = (name.length() * 2) - 2 - i - middleACount;
                 int tempReverseStepLeft = (name.length() * 2) - 2 - (name.length() - i) - middleACount;
 
@@ -265,20 +265,20 @@ public class Greedy {
                 middleACount = 0;
             }
 
-            if (isA) stepRight --;
+            if (isA) stepRight--;
             else stepRight = 0;
 
-            if(!isA) stepLeft = 0;
-            else if (i == 1 && stepLeft < 0) stepLeft --;
+            if (!isA) stepLeft = 0;
+            else if (i == 1 && stepLeft < 0) stepLeft--;
         }
 
-        stepLeft    += name.length() -1;
-        stepRight   += name.length() -1;
+        stepLeft += name.length() - 1;
+        stepRight += name.length() - 1;
 
-        if(reverseStepRight != 0) stepRight = Math.min(stepRight , reverseStepRight);
-        if(reverseStepLeft != 0) stepLeft = Math.min(stepLeft , reverseStepLeft);
+        if (reverseStepRight != 0) stepRight = Math.min(stepRight, reverseStepRight);
+        if (reverseStepLeft != 0) stepLeft = Math.min(stepLeft, reverseStepLeft);
 
-        return upDownCount + Math.min(stepRight, stepLeft) ;
+        return upDownCount + Math.min(stepRight, stepLeft);
     }
 
 //    public int solution5(String name){
@@ -318,45 +318,44 @@ public class Greedy {
 //        return upDownCount += Math.min(reTurnBack, Math.min(straight,turnBack));
 //    }
 
-    public int solution5(String name){
+    public int solution5(String name) {
         int length = name.length();
 
         int upDownCount = 0;
-        int turnBack = length -1;
-        int reTurnBack = length -1;
-        int straight = length -1;
+        int turnBack = length - 1;
+        int reTurnBack = length - 1;
+        int straight = length - 1;
 
-        for(int i = 0; i < length ; i++) {
-            upDownCount += Math.min(name.charAt(i) - 'A',  'Z' - name.charAt(i) + 1);
+        for (int i = 0; i < length; i++) {
+            upDownCount += Math.min(name.charAt(i) - 'A', 'Z' - name.charAt(i) + 1);
 
             int next;
             int count = 0;
-            if(i!= 0) {
+            if (i != 0) {
                 next = i + 1;
                 while (next < length && name.charAt(next) == 'A') {
 
                     count++;
 
-                    if(next == length -1 ) straight = Math.min(straight, length-count-1);
+                    if (next == length - 1) straight = Math.min(straight, length - count - 1);
 
                     next++;
                 }
-                turnBack = Math.min(turnBack, i+length-count-1);
-            }else{
+                turnBack = Math.min(turnBack, i + length - count - 1);
+            } else {
                 // 마지막인덱스 부터 가장 가까운 a 들을 찾아야함
-                next = length -1;
+                next = length - 1;
                 int index = 0;
                 while (next > 0) {
-                    if(name.charAt(next) == 'A'){
-                        if(index == 0) index = next;
+                    if (name.charAt(next) == 'A') {
+                        if (index == 0) index = next;
                         count++;
-                    }
-                    else if(count != 0) {
-                        turnBack = Math.min(turnBack, i+length-count-1+index);
+                    } else if (count != 0) {
+                        turnBack = Math.min(turnBack, i + length - count - 1 + index);
                     }
                     next--;
                 }
-                turnBack = Math.min(turnBack, i+length-count-1);
+                turnBack = Math.min(turnBack, i + length - count - 1);
             }
         }
 
@@ -379,7 +378,7 @@ public class Greedy {
         // 그 이전의 값들은 버린다.
         //
 
-        return upDownCount += Math.min(reTurnBack, Math.min(straight,turnBack));
+        return upDownCount += Math.min(reTurnBack, Math.min(straight, turnBack));
     }
 
     /**
@@ -387,16 +386,16 @@ public class Greedy {
      * "19 24"	2	"94"
      * "1231234"	3	"3234" 4
      * "41 7 7 252841"	4	"775841"
+     *
      * @param number
      * @param k
-     * @return
-     * 12344321
+     * @return 12344321
      * 1234
      * 123456321
-     *
+     * <p>
      * 타임아웃 킹왕짱 많이남... ㅜㅜ
      * 스택을 이용하란다 에흐흐
-    */
+     */
 //        while (result.length() < size) {
 //            char[] arr = numbers.substring(0, numbers.length() - knife + 1).toCharArray();
 ////            Arrays.sort(arr);
@@ -409,7 +408,7 @@ public class Greedy {
 //            numbers = numbers.substring(numbers.indexOf(max) + 1);
 //            knife --;
 //        }
-    public String solution6(String number , int k){
+    public String solution6(String number, int k) {
         StringBuilder sb = new StringBuilder(number);
         StringBuilder result = new StringBuilder();
 
@@ -429,6 +428,50 @@ public class Greedy {
         }
 
         return result.toString();
+    }
+
+    /**
+     * people	limit	return
+     * [70, 50, 80, 50]	100	3
+     * [70, 80, 50]	100	3
+     * @param people
+     * @param limit
+     * @return
+     */
+    public int solution7(int[] people, int limit) {
+        int answer = 0;
+        int front = 0;
+
+        Arrays.sort(people);
+
+//        for (int i = people.length - 1; i >= front; i--) {
+//            for (int j = front ; j <= i; j++) {
+//                if (people[j] + people[i] <= limit){
+//                    answer++;
+//                    front = j + 1;
+//                    break;
+//                }else{
+//                    answer ++;
+//                    break;
+//                }
+//            }
+//        }
+
+//        for (int i = people.length - 1; i >= front; i--) {
+//            if (people[i] + people[front] > limit) {
+//                answer++;
+//            }else{
+//                answer++;
+//                front++;
+//            }
+//        }
+
+        for (int i = people.length - 1; i >= front; i--) {
+            if (people[i] + people[front] <= limit) front++;
+            answer++;
+        }
+        
+        return answer;
     }
 
 }
