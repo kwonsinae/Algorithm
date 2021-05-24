@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 public class Implementation {
@@ -131,152 +132,77 @@ public class Implementation {
 //        }
 //        return minLength;
 //    }
-//    private int[][] key, lock;
-//    private int width = 0;
-//    private int height = 0;
 //
-//    public Boolean solution(int[][] key, int[][] lock) {
-//
-//        this.lock = lock;
-//        this.key = key;
-//
-//        int[] minPoint = {lock.length ,lock.length};
-//        int[] maxPoint = {0,0};
-//
-//        for (int i = 0; i < lock.length; i++ ) {
-//            for (int j = 0; j < lock.length; j++ ) {
-//                if(lock[i][j] == 0){
-//                    minPoint[0] = Math.min(i , minPoint[0]);
-//                    minPoint[1] = Math.min(j , minPoint[1]);
-//                    maxPoint[0] = Math.max(i , maxPoint[0]);
-//                    maxPoint[1] = Math.max(j , maxPoint[1]);
-//                }
-//            }
-//        }
-//
-//        width = maxPoint[0] - minPoint[0] + 1;
-//        height = maxPoint[1] - minPoint[1] + 1;
-//        if(width < 0 && height < 0) return false;
-//        if(width > key.length && height > key.length ) return false;
-//
-//        for (int i = minPoint[0]; i <= key.length - width; i++ ) {
-//            for (int j = minPoint[1]; j <= key.length - height; j++ ) {
-//                if (isSuit(i, j)) return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-//
-//    private Boolean isSuit(int startRow, int startCol){
-//        Boolean check0 = true;
-//        Boolean check90 = true;
-//        Boolean check180 = true;
-//        Boolean check270 = true;
-//
-//        for (int keyRow = 0; keyRow < width; keyRow++) {
-//            for (int keyCol = 0; keyCol < height; keyCol++) {
-//                if (lock[startRow + keyRow][startCol + keyCol] == 1) {
-//                    if (key[keyRow][keyCol] == 1) check0 = false;
-//                    if (key[height - 1 - keyCol][keyRow] == 1) check90 = false;
-//                    if (key[width - 1 - keyRow][height - 1 - keyCol] == 1) check180 = false;
-//                    if (key[keyCol][width - 1 - keyRow] == 1) check270 = false;
-//                }
-//                System.out.println(" keyRow " + keyRow + " keyCol " + keyCol + " is?? " +
-//                        ((check0 || check90 || check180 || check270)? true : false));
-//            }
-//        }
-//
-//        if (check0 || check90 || check180 || check270) return true;
-//        return false;
-//    }
 
-//    int size = key.length - 1;
-//        for (int keyRow = 0; keyRow < width; keyRow++) {
-//        for (int keyCol = 0; keyCol < height; keyCol++) {
-//
-//            if ((startRow + keyRow >= lock.length) || (startCol + keyCol >= lock.length)) break;
-//
-//            if (lock[startRow + keyRow][startCol + keyCol] == 1) {
-//                if (key[keyRow][keyCol] == 1)               check0 = false;
-//                if (key[size - keyCol][keyRow] == 1)        check90 = false;
-//                if (key[size - keyRow][size - keyCol] == 1) check180 = false;
-//                if (key[keyCol][size - keyRow] == 1)        check270 = false;
-//            }
-//        }
-//    }
-//
-//        if (check0 || check90 || check180 || check270) return true;
-//        return false;
+    /**
+     * https://programmers.co.kr/learn/courses/30/lessons/60059
+     * 자물쇠와 열쇠
+     */
+    private int[][] lock;
+    private int[][] key;
+    public Boolean solution(int[][] key, int[][] lock) {
 
-//    private Boolean isSame(int i, int j , int length) {
-//        Boolean check0 = true;
-//        Boolean check90 = true;
-//        Boolean check180 = true;
-//        Boolean check270 = true;
-//
-//        for (int r = 0; r < length; r++) {
-//            for (int c = 0; c < length; c++) {
-//                int n = lock[i + c][j + r];
-//
-//                if (n == key[r][c]) check0 = false;
-//                if (n == key[length - c][r]) check90 = false;
-//                if (n == key[length - r][length - c]) check180 = false;
-//                if (n == key[c][length - r]) check270 = false;
-//
-//                // 죄다 false 면 리턴
-//                if (!check0 && !check90 && !check180 && !check270) {
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        return true;
-//    }
+        this.key = key;
+        this.lock = lock;
 
-    //
-//        for (int r = 0; r < maxX; r++) {
-//        for (int c = 0; c < maxY; c++) {
-//            int n = lock[i + c][j + r];
-//
-//            if (n == key[r][c]) check0 = false;
-//            if (n == key[maxY - c][r]) check90 = false;
-//            if (n == key[maxY - r][maxX - c]) check180 = false;
-//            if (n == key[c][maxX - r]) check270 = false;
-//
-//            // 죄다 false 면 리턴
-//            if (!check0 && !check90 && !check180 && !check270) {
-//                return false;
-//            }
-//        }
-//    }
-//    private Boolean isSame(int i, int j) {
-//        Boolean check0 = true;
-//        Boolean check90 = true;
-//        Boolean check180 = true;
-//        Boolean check270 = true;
-//
-//        int width =  lock.length - i -1;
-//        int height =   lock.length - j -1;
-//
-//        for(int r = 0; r <= width; r++){
-//            for(int c = 0; c <= height; c++){
-//
-//                int n = key[r + i][c + j];
-//
-//                if (n == lock[r][c]) check0 = false;
-//                if (n == lock[width-c][r]) check90 = false;
-//                if (n == lock[width-r][width-c]) check180 = false;
-//                if (n == lock[c][width-r]) check270 = false;
-//
-//                // 죄다 false 면 리턴
-//                if (!check0 && !check90 && !check180 && !check270) {
-//                    return false;
-//                }
-//            }
-//        }
-//
-//        return true;
-//    }
+        for(int i = 1 - key.length; i < key.length + lock.length - 1 ; i ++){
+            for(int j = 1 - key.length; j < key.length + lock.length - 1 ; j ++){
+                if(isOpenAble(i , j)) return true;
+            }
+        }
+        
+        return false;
+    }
+
+    private Boolean isOpenAble(int lockI, int lockJ) {
+        boolean isOpenAble = true;
+
+        int direction = 0;
+        while (direction < 4) {
+            isOpenAble = true;
+
+            int[][] temp = new int[lock.length][lock.length];
+            for (int i = 0; i < lock.length; i++) {
+                for (int j = 0; j < lock.length; j++) {
+                    temp[i][j] = lock[i][j];
+                }
+            }
+
+            for (int i = 0; i < key.length; i++) {
+                for (int j = 0; j < key.length; j++) {
+
+                    int tempI = lockI + i;
+                    int tempJ = lockJ + j;
+
+                    if(tempI >= lock.length || tempJ >= lock.length || tempI < 0 || tempJ < 0) continue;
+
+                    switch (direction) {
+                        case 0:
+                            temp[tempI][tempJ] += key[i][j];
+                            break;
+                        case 1:
+                            temp[tempI][tempJ] += key[key.length - j - 1][i];
+                            break;
+                        case 2:
+                            temp[tempI][tempJ] += key[key.length - i - 1][key.length - j - 1];
+                            break;
+                        case 3:
+                            temp[tempI][tempJ] += key[j][key.length - i - 1];
+                            break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < temp.length; i++) {
+                for (int j = 0; j < temp.length; j++) {
+                    if(temp[i][j] != 1) isOpenAble = false;
+                }
+            }
+            if(isOpenAble) break;
+
+            direction++;
+        }
+        return isOpenAble;
+    }
 }
 
