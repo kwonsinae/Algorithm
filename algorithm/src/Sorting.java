@@ -139,4 +139,91 @@ public class Sorting {
         return max;
     }
 
+    /**
+     * 실패율
+     * 계산해서 넣고 벨류값으로 쏘팅 하고 키값으로 배열에 넣어준다.
+     * @return
+     */
+//    public int[] solution(int n, int[] stages) {
+//        int[] answer = new int[n];
+//
+//        List<Map.Entry<Integer, Double>> stageList = new LinkedList<>();
+//        for(int i = 1 ; i < n+1; i++){
+//            Double onCount = 0.0;
+//            Double passCount = 0.0;
+//            for(int s : stages){
+//                if(s == i) onCount ++;
+//                if(s > i) passCount ++;
+//            }
+//
+//            Double rate = 0.0;
+//            if(passCount == 0 && onCount != 0) rate = 100.0;
+//            else if(passCount != 0 && onCount != 0) rate = onCount / passCount;
+//
+//            stageList.add(new AbstractMap.SimpleEntry<>(i, rate));
+//        }
+//
+//        Collections.sort(stageList, (o1, o2) -> {
+//            if(o1.getValue() == o2.getValue()) return Integer.compare(o1.getKey() , o2.getKey());
+//            return Double.compare(o1.getValue() , o2.getValue()) * -1;
+//        });
+//
+//        for(int i = 0 ; i < n; i++){
+//            answer[i] = stageList.get(i).getKey();
+//        }
+//
+//        return answer;
+//    }
+
+    /**
+     * 실패율 참고용
+     * 디버깅했는데 이상함
+     *
+     * int n = 3;
+     * int[] stages = {2, 1, 3};
+     *
+     * [Infinity, 1.0, 0.3333333333333333]
+     *  ==> 이렇게 나오는데
+     *
+     * [1.0 , 0 , 0.5] 가 나와야할 것 같은데..
+     */
+//    public int[] solution(int N, int[] stages) {
+//        int[] answer = new int[N];
+//        double[] tempArr = new double[N];
+//
+//        int arrLength = stages.length;
+//        int idx = arrLength;
+//        double tempD = 0;
+//        int tempI = 0;
+//
+//        // answer에 현재 on인 사용자수 삽입
+//        for (int i = 0; i < arrLength; i++) {
+//            int stage = stages[i];
+//            if (stage != N + 1)
+//                answer[stage - 1] += 1;
+//        }
+//
+//        //
+//        for (int i = 0; i < N; i++) {
+//            int personNum = answer[i];
+//            tempArr[i] = (double) personNum / idx;
+//            idx -= personNum;
+//            answer[i] = i + 1;
+//        }
+//
+//        for (int i = 0; i < N; i++) {
+//            for (int j = 1; j < N - i; j++) {
+//                if (tempArr[j - 1] < tempArr[j]) {
+//                    tempD = tempArr[j - 1];
+//                    tempArr[j - 1] = tempArr[j];
+//                    tempArr[j] = tempD;
+//
+//                    tempI = answer[j - 1];
+//                    answer[j - 1] = answer[j];
+//                    answer[j] = tempI;
+//                }
+//            }
+//        }
+//        return answer;
+//    }
 }
