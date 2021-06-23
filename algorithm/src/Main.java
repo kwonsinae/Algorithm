@@ -15,9 +15,14 @@ public class Main {
 
         // ["frame", "frodo", "front", "frost", "frozen", "kakao"]
 
-        String[] words = {"frodo", "front", "frost", "frozen", "frame", "kakao"};
-        String[] queries = {"fro??", "????o", "fr???", "fro???", "pro?"};
-        System.out.println(binarySearch.solution(words , queries));
+//        String[] words = {"frodo", "front", "frost", "frozen", "frame", "kakao"};
+//        String[] queries = {"fro??", "????o", "fr???", "fro???", "pro?"};
+//        System.out.println(binarySearch.solution(words , queries));
+
+//        6	[7, 10]	28
+        int n = 6;
+        int[] times = {7, 10};
+        System.out.println(binarySearch.solution(n , times));
 
     }
 }

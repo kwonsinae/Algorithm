@@ -33,6 +33,7 @@ public class BinarySearch {
         HashMap<Integer , ArrayList<String>> map = new HashMap<>();
         HashMap<Integer , ArrayList<String>> reverseMap = new HashMap<>();
 
+        // 리스트를 맵에 저장
         for(int i = 0 ; i < words.length; i++){
             int key = words[i].length();
             if(map.get(key) == null && reverseMap.get(key) == null) {
@@ -43,6 +44,7 @@ public class BinarySearch {
             reverseMap.get(key).add(new StringBuffer(words[i]).reverse().toString());
         }
 
+        // 소팅한다
         for(ArrayList<String> list : map.values()){
             list.sort(String::compareTo);
         }
@@ -51,6 +53,7 @@ public class BinarySearch {
             list.sort(String::compareTo);
         }
 
+        // 답을 구한다
         for (int i = 0; i < qLen; i++) {
 
             String query = queries[i];
@@ -158,5 +161,65 @@ public class BinarySearch {
         // 결국 min 이 max 인 상황
         return min;
     }
+
+    /**
+     * 입국심사
+     * https://programmers.co.kr/learn/courses/30/lessons/43238
+     * 오타주의!!!!!!!!
+     */
+    public long solution(int n, int[] times) {
+        Arrays.sort(times);
+
+        int len = times.length;
+        long min = (n * (long)times[0])/(long)len;
+        long max = (n * (long)times[len-1])/(long)len;
+
+        while (min < max){
+
+            long mid = (min + max) / 2;
+            long count = 0;
+
+            for(int i = 0; i < times.length; i ++){
+                count += mid/times[i];
+            }
+
+            if(count >= n){
+                max = mid;
+            }else {
+                min = mid + 1;
+            }
+        }
+
+        return min;
+    }
+
+    /**
+     * 참고용 코드 
+     */
+//    이진수 자릿수 이용한 풀이(정답코드첨부)
+//    이진수 자릿수를 이용하면 직관적인 것 같아요.
+//
+//    다들 같은 방법으로만 풀으셨길래 다른 풀이 올려보아요.
+//
+//    작성중인 코드―solution.py
+//
+//    def solution(n, times):
+//    i = 50
+//    t = 0
+//            while i > 0:
+//    i -= 1
+//    temp = t + 2**i
+//            cnt = 0
+//        for time in times:
+//    cnt += temp//time
+//        if cnt >= n:
+//    cnt1 = 0
+//            for time in times:
+//    cnt1 += (temp-1)//time
+//            if cnt1 < n:
+//            return temp
+//        else:
+//    t = temp
+//    return t
 
 }
