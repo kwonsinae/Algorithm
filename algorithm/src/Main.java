@@ -2,27 +2,11 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        //    [[7], [3, 8], [8, 1, 0], [2, 7, 4, 4], [4, 5, 2, 6, 5]]	30
+        int[][] triangle = {{7}, {3, 8}, {8, 1, 0}, {2, 7, 4, 4}, {4, 5, 2, 6, 5}};
 
-        BinarySearch binarySearch = new BinarySearch();
-
-//        int n = 6;
-//        int[] times = {7,10};
-//
-//        System.out.println(binarySearch.solutions(n , times));
-
-//        ["frodo", "front", "frost", "frozen", "frame", "kakao"]	["fro??", "????o", "fr???", "fro???", "pro?"]
-//        [3, 2, 4, 1, 0]
-
-        // ["frame", "frodo", "front", "frost", "frozen", "kakao"]
-
-//        String[] words = {"frodo", "front", "frost", "frozen", "frame", "kakao"};
-//        String[] queries = {"fro??", "????o", "fr???", "fro???", "pro?"};
-//        System.out.println(binarySearch.solution(words , queries));
-
-//        6	[7, 10]	28
-        int n = 6;
-        int[] times = {7, 10};
-        System.out.println(binarySearch.solution(n , times));
+        Dynamic dynamic = new Dynamic();
+        System.out.println(dynamic.solution(triangle));
 
     }
 }
